@@ -80,6 +80,9 @@ class ModelTrainer:
             mlflow.sklearn.log_model(model, name="model")
 
             # Save model locally
+            
+            os.makedirs(self.config['model']['model_dir'], exist_ok=True) 
+
             model_path = os.path.join(
                 self.config['model']['model_dir'],
                 f"{self.config['model']['model_name']}_{model_name}.pkl"
