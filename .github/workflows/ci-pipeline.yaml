@@ -166,7 +166,6 @@ jobs:
           file: deployment/Dockerfile
           push: true
           tags: |
-            # ${{ secrets.DOCKERHUB_USERNAME }}/salary-predictor:${{ github.sha }}
             ${{ secrets.DOCKERHUB_USERNAME }}/salary-predictor:latest
       
       - name: Deploy to VM via SSH
