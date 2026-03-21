@@ -168,3 +168,20 @@ jobs:
           tags: |
             ${{ secrets.DOCKERHUB_USERNAME }}/salary-predictor:${{ github.sha }}
             ${{ secrets.DOCKERHUB_USERNAME }}/salary-predictor:latest
+      
+      - name: Deploy to VM via SSH
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.VM_HOST }}
+          username: ${{ secrets.VM_USER }}
+          key: ${{ secrets.VM_SSH_KEY }}
+          script: |
+            # docker pull ${{ secrets.DOCKERHUB_USERNAME }}/salary-predictor:${{ github.sha }}
+
+            docker stop salary-app || true
+            docker rm salary-app || true
+
+            docker run -d \
+              --name salary-app \
+              -p 8000:8000 \
+              ${{ secrets.DOCKERHUB_USERNAME }}/salary-predictor:${{ github.sha }}
