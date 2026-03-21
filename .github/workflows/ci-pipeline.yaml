@@ -175,7 +175,7 @@ jobs:
           username: ${{ secrets.VM_USER }}
           key: ${{ secrets.VM_SSH_KEY }}
           script: |
-            # docker pull ${{ secrets.DOCKERHUB_USERNAME }}/salary-predictor:${{ github.sha }}
+            # docker pull ${{ secrets.DOCKERHUB_USERNAME }}/salary-predictor:latest
 
             docker stop salary-app || true
             docker rm salary-app || true
@@ -183,4 +183,5 @@ jobs:
             docker run -d \
               --name salary-app \
               -p 9000:9000 \
-              ${{ secrets.DOCKERHUB_USERNAME }}/salary-predictor:${{ github.sha }}
+              ${{ secrets.DOCKERHUB_USERNAME }}/salary-predictor:latest
+      
