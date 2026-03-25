@@ -12,7 +12,7 @@ import os
 
 logger = logging.getLogger(__name__)
 
-# used to train the model
+# used to train the model1
 class ModelTrainer:
     def __init__(self, config: dict, train_data = None, test_data = None):
         self.config = config
